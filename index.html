@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>free advice</title>
+    <link
+      rel="shortcut icon"
+      href="./favicon/favicon-16x16.png"
+      type="image/x-icon"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+
+      #content {
+        max-width: 400px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      #text-display {
+        background-color: #f1f1f1;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      #button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 30px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      /* Create the rotating light animation */
+      #content::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 5px solid transparent;
+        border-radius: 15px;
+        z-index: -1;
+        animation: rotateLight 3s linear infinite;
+      }
+
+      @keyframes rotateLight {
+        0% {
+          border-color: #86c6ff;
+        }
+        25% {
+          border-color: #1f0361f1;
+        }
+        50% {
+          border-color: #4db6ac;
+        }
+        75% {
+          border-color: #aed581;
+        }
+        100% {
+          border-color: #ffab91;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <div id="text-display">
+        <h3>Hari 🕉️</h3>
+        <h1>Get a Free Advice!</h1>
+      </div>
+    </div>
+    <button id="button" onclick="getAdvice()">Click Me!</button>
+  </body>
+
+  <script>
+    async function getAdvice() {
+      const res = await fetch("https://api.adviceslip.com/advice");
+      const data = await res.json();
+      document.querySelector("h1").textContent = data.slip.advice;
+      // author: Ganesh M N
+    }
+  </script>
+</html>
